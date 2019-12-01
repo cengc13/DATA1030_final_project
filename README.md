@@ -4,10 +4,12 @@ This final project aims to develop regression and classification models to evalu
 
 ## Packages
 
-- Machine learning models-[scikit-learn](https://scikit-learn.org/stable/)
-- Data analysis-[pandas](https://pandas.pydata.org/)
-- Linear algebra-[numpy](https://numpy.org/)
-- Visualizaiton-[matplotlib](https://matplotlib.org/)
+- python version-Python 3.6.5
+- Machine learning models-[scikit-learn==0.21.3](https://scikit-learn.org/stable/)
+- Data analysis-[pandas==0.25.0](https://pandas.pydata.org/)
+- Linear algebra-[numpy==1.16.1](https://numpy.org/)
+- Visualizaiton-[matplotlib==2.0.2](https://matplotlib.org/)
+- Feature importance-[shap==0.32.1](https://christophm.github.io/interpretable-ml-book/shap.html)
 
 ## References
 
