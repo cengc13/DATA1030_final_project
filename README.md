@@ -1,6 +1,6 @@
 # Using Machine Learning to Estimate the Energy Performance of Residential Buildings # 
 
-This final project aims to develop regression and classification models to evaluate the energy efficiencyof residential buildings. Given eight features of a building, we hope to predict the corresponding *heat loading* and *cool loading*. 
+This final project aims to develop regression models to evaluate the energy efficiency of residential buildings. Given eight features of a building, we hope to predict the corresponding efficiency that is characterized by two output variables, *heat loading* and *cool loading*. We also highlight the important features to provide potential guidelines for the design of energy-efficient residential buildings.
 
 ## Packages
 
