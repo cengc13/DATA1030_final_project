@@ -115,7 +115,7 @@ We first investigate the properties of two target variables. Fig.~\ref{fig:heati
 \caption{Properties of two target variables} 
 \end{figure}
 
-The Fig.~\ref{fig:heating_load_versus_continuous} and Fig.~\ref{fig:cooling_load_versus_continuous} indicate that the relationship between the input variables and target variable is not trivial. It suggests that a simpler learner such as linear regression is not able to describe this complicated behavior, we need more sophisticated model such as random forest regressor to justify this relationship.
+The Fig.~\ref{fig:heating_load_versus_continuous} and Fig.~\ref{fig:cooling_load_versus_continuous} indicate that the relationship between the input variables and target variable is not trivial. It suggests that a simpler learner such as linear regression is not able to describe this complicated behavior, we need more sophisticated model such as random forest regression to justify this relationship.
 
 
 \begin{figure}[!bht]
@@ -178,11 +178,11 @@ We elaborate on the preprocessing for various types of features
 After preprocessing, there are in total $16$ input features and $2$ output features.
 
 \subsection{Machine learning pipeline}
-The following discussion applies to pipelines of models for both target variables. I used the ordinary k fold cross-validation (CV) because the dataset is iid.
-Five folds are used. The data splits to three parts ($64\%$ train, $16\%$ CV, $20\%$ test). The dataset if shuffled before splitting with given random state to make sure that this process is reproducible. Ten different random states  are used to estimate the uncertainties  due to data splitting. For non-deterministic methods, the uncertainty for the model itself is evaluated by fixing the random state for data splitting while varying the random state for model for $5$ times. I tried four machine learning methods and tuned the hyperparameters using a grid search.
+The following discussion applies to pipelines of models for both target variables. I used the ordinary k fold cross-validation (CV) because the dataset is identically and independently distributed.
+Five folds are used. The data splits to three parts ($64\%$ train, $16\%$ CV, $20\%$ test). The dataset is shuffled before splitting with given random state to make sure that this process is reproducible. Ten different random states  are used to estimate the uncertainties  due to data splitting. For non-deterministic methods, the uncertainty for the model itself is evaluated by fixing the random state for data splitting while varying the random state for the model for $5$ times. I tried four machine learning methods and tuned the hyperparameters using a grid search.
 
 For linear regression model, I used \textit{Lasso} linear model and I tuned the regularization strength (alpha values) in the range between $0.0001$ and $100$.
-For random forest, the maximum depth and minimum samples for a split are tuned. I tried the range of 2 to 20 for maximum depth and the range of 2 to 12 for minimum samples for a split. 
+For random forest, the maximum depth and minimum samples for a split are tuned. I tried the range of $2$ to $20$ for maximum depth and the range of 2 to 12 for minimum samples for a split. 
 For Support vector regression, I tuned the C and gamma, trying the range of 
 $1$ to $1000$, and $0.0001$ to $100$, respectively. 
 For multilayer perceptron regression, I tuned the regularization coefficients (alpha) in the range of 0.0001 to 0.01, and the number of nodes in hidden layers (I tied 10 and 15 nodes). 
@@ -233,7 +233,7 @@ Another interesting observation is that heating load can be estimated much more 
 \subsection{Global feature importance \label{subsec:gfi}}
 We note that there is a large model uncertainty for neural network regression. For the feature importance analysis, we will focus on the random forest model, which gives more stable and consistent performance. We will use R2 score as the metric for feature importance evaluation. 
 
-We determine the global feature importance by a permutation test. We found that relative compactness is the most important feature for both output variables (see Fig.~\ref{fig:permutation_Y1} and Fig.~\ref{fig:permutation_Y2}). It makes sense because it defines the surface-to-volume of the building, which is an important properties for heat transfer. Interesting, the second most important feature is the glazing area (X7), that does not show up in the simple linear correlation analysis. From engineering perspective, it is intuitively understood that glazing area is of great importance because the amount of glazing is associated with the heat adsorbed from the sun. It implies that statistical learning has potential in mining  obvious pattern behind the data. The results fit into a human/academic context because it agrees with our common sense, and it is well-acknowledged in scientific community that relative compactness is an important factor related to the energy efficiency of buildings. I also studies the global feature importance using \textit{Shapley}, the results are shown in Fig.~\ref{fig:shap_Y1} and Fig.~\ref{fig:shap_Y2}, and it is consistent with permutation test although 
+We determine the global feature importance by a permutation test. We found that relative compactness is the most important feature for both output variables (see Fig.~\ref{fig:permutation_Y1} and Fig.~\ref{fig:permutation_Y2}). It makes sense because it defines the surface-to-volume of the building, which is an important properties for heat transfer. Interesting, the second most important feature is the glazing area (X7), that does not show up in the simple linear correlation analysis. From engineering perspective, it is intuitively understood that glazing area is of great importance because the amount of glazing is associated with the heat adsorbed from the sun. It implies that statistical learning has potential in mining  hidden pattern behind the data. The results fit into a human/academic context because it agrees with our common sense. For example, it is well-acknowledged in scientific community that relative compactness is an important factor related to the energy efficiency of buildings. I also studies the global feature importance using \textit{Shapley}, the results are shown in Fig.~\ref{fig:shap_Y1} and Fig.~\ref{fig:shap_Y2}, and it is mostly consistent with permutation test despite that 
 the order of importance of features for heating load is now slightly different than that for cooling load.
 
 \begin{figure}[!bht]
@@ -279,7 +279,7 @@ With the help of \textit{SHapley}, I studied the the local feature importance fo
 
 
 \section{Outlook}
-We could try more other models to improve the performance, such as gradient boosting. We might have missed some important features for the prediction of cooling load, which might be the reason for the poor model performance on it. More formal tests need to be carried out to provide more insights. Also, we can try to tune more parameters, such as activation functions and learning rates for a neural network model.    
+We could try other models to improve the performance, such as gradient boosting. We might have missed some important features for the prediction of cooling load, which might be the reason for the poor model performance on it. More formal tests need to be carried out to provide more insights. Also, we can try to tune more parameters, such as activation functions and learning rates for a neural network model.
 
 \section{References}
 \begin{enumerate}
